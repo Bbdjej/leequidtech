@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joel Wafula | Portfolio</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+            cursor: none;
+        }
+
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #2d2d2d;
+            --text-color: #f5f5f5;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.95)),
+                        url('https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg') center/cover;
+            filter: blur(8px);
+            z-index: -1;
+        }
+
+        .navbar {
+            position: fixed;
+            width: 100%;
+            padding: 1.5rem;
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar:hover {
+            background: rgba(26, 26, 26, 0.8);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            padding: 100px 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero {
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 0 30px rgba(108, 99, 255, 0.6);
+            animation: float 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(108, 99, 255, 0.8);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #6c63ff, #9d94ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(45, 45, 45, 0.7);
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(45, 45, 45, 0.7);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 8px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(108, 99, 255, 0.3);
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            padding: 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            background: rgba(108, 99, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: all 0.3s ease, transform 0.1s ease;
+            z-index: 9999;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: all 0.1s ease;
+            z-index: 9998;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .projects {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <div class="cursor-trail"></div>
+
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <img src="https://images.pexels.com/photos/3775131/pexels-photo-3775131.jpeg" 
+             alt="Profile" 
+             class="profile-img"
+             data-aos="fade-up">
+        <h1 data-aos="fade-up" data-aos-delay="200">JOEL WAFULA</h1>
+        <p data-aos="fade-up" data-aos-delay="400">Passionate Developer & Engineer</p>
+        <div class="social-links" data-aos="fade-up" data-aos-delay="600">
+            <a href="https://wa.me/+254115187781" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="mailto:JOELWAGULA2117@GMAIL.COM"><i class="far fa-envelope"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="projects">
+            <div class="project-card" data-aos="zoom-in">
+                <h3>LEEQUID TECH (Upcoming)</h3>
+                <div class="tech-stack">
+                    <i class="fab fa-react"></i>
+                    <i class="fab fa-python"></i>
+                    <i class="fab fa-aws"></i>
+                </div>
+                <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg" 
+                     alt="Leequid Tech" 
+                     style="width:100%; height:200px; object-fit: cover; border-radius: 8px; margin: 1rem 0;">
+                <p>Revolutionary tech solutions combining AI and IoT for modern challenges. Launching Q4 2023.</p>
+                <button style="margin-top: 1rem;">View Details</button>
+            </div>
+            <!-- Add more project cards here -->
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-form" data-aos="fade-up">
+            <h2>Get in Touch</h2>
+            <form action="https://formspree.io/f/xeogaena" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <div class="social-links" style="margin-top: 2rem;">
+                <a href="https://wa.me/+254115187781" target="_blank" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="mailto:JOELWAGULA2117@GMAIL.COM" class="email-btn">
+                    <i class="far fa-envelope"></i> Email
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: false,
+            easing: 'ease-in-out'
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const trail = document.querySelector('.cursor-trail');
+        let trailPositions = [];
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+            
+            // Add current position to trail positions
+            trailPositions.push({ x: e.clientX, y: e.clientY });
+            
+            // Keep only last 5 positions
+            if (trailPositions.length > 5) {
+                trailPositions.shift();
+            }
+            
+            // Update trail position with delay
+            setTimeout(() => {
+                const position = trailPositions[0];
+                if (position) {
+                    trail.style.left = `${position.x}px`;
+                    trail.style.top = `${position.y}px`;
+                }
+            }, 100);
+        });
+
+        // Hover effects
+        document.querySelectorAll('a, button').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursor.style.backgroundColor = 'rgba(108, 99, 255, 0.3)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.body.style.backgroundPositionY = `${-scrolled * 0.5}px`;
+        });
+    </script>
+</body>
+</html>
